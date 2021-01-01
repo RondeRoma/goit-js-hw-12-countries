@@ -5,7 +5,7 @@ import list from '../templates/list.hbs';
 import"@pnotify/core/dist/PNotify.css";
 import "@pnotify/core/dist/BrightTheme.css";
 import { error } from '@pnotify/core';
-const debounce = require('lodash.debounce');
+import debounce from 'lodash.debounce';
 
 const newFetchCountries = new NewFetchCountries();
 
@@ -20,6 +20,9 @@ function onSearchCountry(event) {
     event.preventDefault();
     clierListCountry();
     const searchCountry = event.target.value;
+    if(!searchCountry) {
+        return
+    };
 
     newFetchCountries.fetchCountries(searchCountry).then(data => {
         if (data.length > 10) {
